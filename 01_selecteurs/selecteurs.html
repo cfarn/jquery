@@ -28,6 +28,11 @@
     <span>Span 2</span>
     <span class="fakeClass">Span 3</span>
 
+    <figure>
+        <img src="b.jpg" alt="Petit chat blanc" style="width: 200px;">
+        <figcaption></figcaption>
+    </figure>
+
     <script src="../source/jquery-3.4.1.js"></script>
     <script>
         // console.log(document.getElementsByTagName('h1'));
@@ -89,6 +94,31 @@
         $('span:eq(2), span:eq(3)').removeAttr("class");
 
         // parents enfants
+            // en sélectionnant le parent(figure), atteindre un enfant(img) pour lui appliquer un attribut title
+            $('figure').find('img').attr("title","petit chat");
+
+            // en sélectionnant un enfant, atteindre le parent. .parent() va chercher le parent naturel, parent().parent() va chercher le parent du parent (ici le body)
+            $('img').parent().parent().css("border", "2px solid green");
+
+        // exercice : récupérer l'attr alt de img dans une var
+        // demander en jquery à ce que var s'affiche dans le figcaption
+
+            // console.log() présent pour vérifier si je parviens à récupérer le contenu de alt
+            console.log($('img').attr('alt'));
+            // ensuite j'affecte ce contenu dans une var (pas obligatoire mais +simple à manipuler)
+            var monAlt = $('img').attr('alt');
+            // je vérifie que ma var contient bien le alt
+            console.log(monAlt);
+            // je sélectionne ma légende (figcaption) pour remplir la balise avec ma variable (contenu du alt)
+            $('figcaption').html(monAlt);
+            
+            // Le tout peut aussi se résoudre en 1 seule ligne :
+            // $('figcaption').html($('img').attr('alt'));
+       
+        
+
+    
+        
 
     </script>
 </body>
