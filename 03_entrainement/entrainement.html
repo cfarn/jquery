@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entrainement jquery</title>
+    <style>
+        h2{
+            border: 1px solid grey;
+            margin: 0;
+            padding: 5px;
+        }
+
+        /* + : seront touchées les div qui suivent directement h2 */
+        h2+div{
+            background: gray;
+            min-width: 150px;
+            height: 150px;
+        }
+
+        #cube{
+            width: 100px;
+            height: 100px;
+            background: blue;
+            position: relative;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1" style="display: none;">
+        Contenu de ma div
+    </div>
+    <button id="b1" style="display: none;">Show</button>
+    <button id="b2">Hide</button>
+    <button id="b3">Toggle</button>
+    <hr>
+    <div id="div2" style="display: none;">
+        <p style="width: 600px; background: lightgrey;">Contenu div 2
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi animi eligendi asperiores optio magnam numquam dicta illum officia, provident ipsam, sequi eveniet aut, voluptates necessitatibus autem sint aperiam ab dolore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa sit labore nulla voluptate consequuntur nobis excepturi iusto et, deserunt dolores incidunt enim quasi, accusantium qui nam debitis quibusdam officiis esse! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <img src="../01_selecteurs/b.jpg" alt="Petit Chat" style="width: 200px; float: left; margin: 10px;">
+            Qui officiis ex architecto nemo suscipit, sit unde nostrum perferendis veritatis maxime fuga saepe dolor iure tenetur facere. Beatae blanditiis natus provident. Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque dolorum illo sed neque laboriosam? Excepturi pariatur eaque dolorum mollitia, beatae ipsam deserunt voluptas odit sint magni sapiente inventore non assumenda! Lorem ipsum dolor sit amet consectetur adipisicing elit. Est beatae obcaecati unde. Accusamus et quasi consequuntur ratione laborum aspernatur nam velit est, dolorum, repellendus pariatur suscipit, accusantium doloribus? Voluptatum, accusamus.
+        </p>
+    </div>
+    <button id="b4">FadeIn</button>
+    <button id="b5">FadeOut</button>
+    <button id="b6">FadeToggle</button>
+    <button id="b7">FadeTo</button>
+
+    <h2 id="titre1">Titre 1</h2>
+    <div id="contenu1" style="display: none;">Contenu 1</div>
+
+    <h2 id="titre2">Titre 2</h2>
+    <div id="contenu2">Contenu 2</div>
+
+    <h2 id="titre3">Titre 3</h2>
+    <div id="contenu3">Contenu 3</div>
+    <hr>
+
+    <div id="cube"></div>
+    
+
+    <script src="../source/jquery-3.4.1.js"></script>
+    <script>
+        $(function(){
+            // méthode show() montre un élément si celui-ci est display none (style="display:none;")
+            $('#b1').click(function(){
+                $('#div1').show();
+                $('#b1').hide();
+                $('#b2').show();
+            });
+        });
+
+        // viser le b2 pour qu'elle cache la div si elle est visible
+        $(function () {
+            $('#b2').click(function(){
+                $('#div1').hide();
+                $('#b2').hide();
+                $('#b1').show();
+            });
+       
+            $('#b3').click(function(){
+                $('#div1').toggle();
+            });
+
+            // fadeToggle / fadeIn /fadeOut
+            $('#b4').click(function(){
+                $('#div2').fadeIn(2000);
+            });
+
+            $('#b5').click(function(){
+                $('#div2').fadeOut(2000,function(){
+                    $('#b5').html('terminé');
+                });
+
+            });
+
+            $('#b6').click(function(){
+                $('#div2').fadeToggle(2000, function(){
+                    // alert('Animation terminée')
+                });
+            });
+
+            // fadeTo (opacité jusqu'à x-intensité)
+            $('#b7').click(function(){
+                $('#div2').fadeTo(1000, 0.5, function(){
+                    // alert('Animation terminée')
+                })
+            });
+
+            // effet slide
+            // slideDown
+            $('#titre1').click(function(){
+                $('#contenu1').slideDown('slow', function(){
+                    // alert('fini !');
+                });
+            });
+
+            // slideUp
+            $('#titre2').click(function () {
+                $('#contenu2').slideUp('slow');
+            });
+
+            // slideToggle
+            $('#titre3').click(function () {
+                $('#contenu3').slideToggle('slow');
+            });
+
+            // animate()
+            $('#cube').on('click', function(){
+                $(this).animate({
+                    'width':'200px',
+                    'height': '80px',
+                    'left': '100px'
+                    });
+            });
+
+         });
+    </script>
+</body>
+
+</html>
