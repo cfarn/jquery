@@ -20,12 +20,16 @@
             height: 150px;
         }
 
-        #cube{
+        #cube, #cube2{
             width: 100px;
             height: 100px;
             background: blue;
             position: relative;
+        }
 
+        #cube2{
+            background: tomato;
+            opacity: 0;
         }
     </style>
 </head>
@@ -60,7 +64,11 @@
     <div id="contenu3">Contenu 3</div>
     <hr>
 
+    <h3>Animation simple</h3>
     <div id="cube"></div>
+
+    <h3 style="position: relative;">Animation par étape</h3>
+    <div id="cube2"></div>
 
 
     <script src="../source/jquery-3.4.1.js"></script>
@@ -135,12 +143,23 @@
                     'width':'200px',
                     'height': '80px',
                     'left': '100px'
-                    });
+                });
             });
 
+            // animation par étape
+            function etapes(){
+                $(this).animate({'opacity': '1'}, 1000);
+                $(this).animate({'left': '200px'}, 2000);
+                $(this).animate({'opacity': '0.5'}, 500);
+                $(this).animate({'left': '-200px'}, 1000);
+                // ! transitions de couleurs impossibles ici
+            };
+            $('#cube2').mouseenter(etapes);
+            $('h3').click(etapes);
+
          });
-        //  http://sharemycode.fr/62m
     </script>
+    <!-- // http://sharemycode.fr/62m -->
 </body>
 
 </html>
