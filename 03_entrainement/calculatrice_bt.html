@@ -2,37 +2,71 @@
 <html lang="fr">
 
 <head>
+    <!-- meta tags indispensables -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- shrink-to-fit=no pour bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculatrice - Jquery - Numa - Bootstrap 4</title>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
 
     </style>
 </head>
 
 <body>
-    <p style="text-align: center;">
-        <span id="afficher">Afficher</span>
-        <span id="/">/</span>
-        <span id="cacher">Cacher</span>
-        <span id="/">/</span>
-        <span id="toggle">Les deux</span>
-    </p>
-    <div id="conteneur">
-        <form action="#" method="GET" name="formulaire">
-            <input type="number" name="saisie1" id="saisie1">
-            <select name="operateur" id="operateur">
-                <option>+</option>
-                <option>-</option>
-                <option>*</option>
-                <option>/</option>
-            </select>
-            <input type="number" name="saisie2" id="saisie2">
-            <input type="submit" name="bouton" id="bouton" value="Calculer">
-        </form>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Calculatrice & Bootstrap 4</h1>
+            <p class="lead">Une calculatrice en jquery - Numa Krouchi</p>
+            <hr class="my-4">
+        </div>
+        <div class="p-4 text-center">
+            <button type="button" class="btn btn-success" id="afficher">Afficher</button>
+            <button type="button" class="btn btn-secondary" id="cacher">Cacher</button>
+            <button type="button" class="btn btn-info" id="toggle">Les deux</button>
+        </div>
+        <div id="conteneur" class="bg-secondary rounded p-4">
+            <form action="#" method="GET" name="formulaire">
+                <div class="row">
+                    <div class="col">
+                        <input type="number" class="form-control" name="saisie1" id="saisie1">
+                    </div>
+                    <div class="col">
+                        <select name="operateur" class="form-control" id="operateur">
+                            <option>+</option>
+                            <option>-</option>
+                            <option>*</option>
+                            <option>/</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" name="saisie2" id="saisie2">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary form-control" name="bouton" id="bouton" value="Calculer">Calculer</button>
+                    </div>
+                    <div class="col">
+                        <button type="reset" class="form-control-sm" value="Réinitialisation">Réinitialisation</button>
+                    </div>
+                </div>
+            </form>
+        <!-- fin conteneur -->
+        </div>
+    <!-- fin container principal -->
     </div>
-
+    <!-- les scripts bootstrap : jQuery must come first, then Popper.js, and then our JavaScript plugins -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <!-- bibliothèque jquery -->
     <script src="../source/jquery-3.4.1.js"></script>
     <script>
@@ -51,26 +85,26 @@
 
                 if (operateur == '+') {
                     resultat = parseFloat(saisie1) + parseFloat(saisie2);
-                    console.log(resultat);
+                    // console.log(resultat);
 
                 }
 
                 if (operateur == '-') {
                     resultat = (saisie1 - saisie2);
-                    console.log(resultat);
+                    // console.log(resultat);
                 }
 
                 if (operateur == '*') {
                     resultat = (saisie1 * saisie2);
-                    console.log(resultat);
+                    // console.log(resultat);
                 }
 
                 if (operateur == '/') {
                     resultat = (saisie1 / saisie2);
-                    console.log(resultat);
+                    // console.log(resultat);
                 }
 
-                alert(saisie1 + operateur + saisie2 + "=" + resultat);
+                alert(saisie1 +" "+ operateur +" "+ saisie2 + " = " + resultat);
             };
 
             $('#bouton').click(calcul);
