@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calculatrice</title>
+    <title>Calculatrice - Jquery - Numa - Bootstrap 4</title>
     <style>
 
     </style>
@@ -19,8 +19,7 @@
         <span id="/">/</span>
         <span id="toggle">Les deux</span>
     </p>
-    <div id="conteneur"
-        style="background: dodgerblue; height:200px; width:80%; margin: 0 auto; text-align:center; padding-top: 80px;">
+    <div id="conteneur">
         <form action="#" method="GET" name="formulaire">
             <input type="number" name="saisie1" id="saisie1">
             <select name="operateur" id="operateur">
@@ -34,7 +33,7 @@
         </form>
     </div>
 
-
+    <!-- bibliothèque jquery -->
     <script src="../source/jquery-3.4.1.js"></script>
     <script>
         $(function () {
@@ -42,13 +41,13 @@
                 event.preventDefault();
                 // console.log('ça marche');
                 var saisie1 = $('#saisie1').val();
-                console.log(saisie1);
+                // console.log(saisie1);
 
                 var saisie2 = $('#saisie2').val();
-                console.log(saisie2);
+                // console.log(saisie2);
 
                 var operateur = $('#operateur').val();
-                console.log(operateur);
+                // console.log(operateur);
 
                 if (operateur == '+') {
                     resultat = parseFloat(saisie1) + parseFloat(saisie2);
