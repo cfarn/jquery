@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrainement - jquery ui</title>
+    <!-- le css de jquery ui -->
+    <link rel="stylesheet" href="jquery-ui.css">
+    <style>
+        .nouvelleClasse {
+            font-size: 30px;
+            color: skyblue;
+        }
+
+        .animation {
+            width: 500px;
+            height: 80px;
+            background: grey;
+            color: #fff;
+            text-align: center;
+            line-height: 80px;
+        }
+
+        .effets {
+            height: 100px;
+            width: 100px;
+            background: tomato;
+        }
+
+        .ui-corner-top {
+            border-radius: 0;
+        }
+
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+            background: tomato;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="accordion">
+        <h3>Section 1</h3>
+        <div>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+        <h3>Section 2</h3>
+        <div>
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+            </ul>
+        </div>
+        <h3>Section 4</h3>
+        <div>
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+        </div>
+    </div>
+
+    <h4 id="ajoutClasse">Ajout de classe jquery-ui</h4>
+
+    <div class="animation">Voici le contenu de la div à animer</div>
+
+    <div class="effets"></div>
+    <button id="bout_effet">Clic pour l'effet</button>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Nunc tincidunt</a></li>
+            <li><a href="#tabs-2">Proin dolor</a></li>
+            <li><a href="#tabs-3">Aenean lacinia</a></li>
+        </ul>
+        <div id="tabs-1">
+            <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi
+                sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus
+                auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci.
+                Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius
+                sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+        </div>
+        <div id="tabs-2">
+            <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc.
+                Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut
+                tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam.
+                Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc.
+                Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat,
+                tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris
+                consectetur tortor et purus.</p>
+        </div>
+        <div id="tabs-3">
+            <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula
+                accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti
+                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel
+                enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium
+                nec, feugiat nec, luctus a, lacus.</p>
+            <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla
+                facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec
+                mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam
+                scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor,
+                tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo.
+                Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- vh : 100% de la taille du navigateur -->
+    <div style="border: 1px solid red; height: 100vh;">
+        <img id="image1" src="images/cheval_01.jpg" alt="cheval">
+        <img id="image4" src="images/cheval_04.jpg" alt="cheval">
+        <img id="image2" src="images/cheval_02.jpg" alt="cheval">
+        <img id="image8" src="images/cheval_08.jpg" alt="cheval">
+        <img id="image3" src="images/cheval_03.jpg" alt="cheval">
+        <img id="image6" src="images/cheval_06.jpg" alt="cheval">
+        <img id="image7" src="images/cheval_07.jpg" alt="cheval">
+        <img id="image9" src="images/cheval_09.jpg" alt="cheval">
+        <img id="image5" src="images/cheval_05.jpg" alt="cheval">
+    </div>  
+
+    <!-- Script de jquery -->
+    <script src="../source/jquery-3.4.1.js"></script>
+    <!-- Script de jquery ui -->
+    <script src="jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#accordion").accordion();
+            $('#ajoutClasse').click(function(){
+                // $(this).addClass("nouvelleClasse", 2000);
+                $(this).toggleClass("nouvelleClasse", 2000);
+            });
+
+            $('.animation').click(function(){
+                // régler H texte et bloc pour rester centré
+                var hauteur = '300px';
+                $(this).animate({
+                    width: hauteur,
+                    height: hauteur,
+                    color: 'black',
+                    backgroundColor: 'purple',
+                    lineHeight: hauteur
+                }, 2000);
+            });
+
+            // Placer un toggle pour qu'un clic sur le bouton entraine une apparition et une disparition du carré avec un effet bounce
+            $('#bout_effet').click(function(){
+                // effect permet de placer un effet au moment de l'évènement
+                $('.effets').effect("bounce");
+                // toggle peut se voir préciser un effet qu'il appliquera lors des apparitions / disparitions
+                $('.effets').toggle("bounce", 1500,function(){
+                    $('#bout_effet').html('terminé');
+                });
+            });
+
+            // mise en place de tabs
+            // $("#tabs").tabs();
+
+            // ouvrir au survol de la souris
+            $("#tabs").tabs({
+                event: "mouseover"
+            });
+
+            // rendre les images draggable()
+            $('#image1').draggable({ snap: "#image2, #image4", snapmode: 'outer'});
+            $('#image2').draggable({ snap: "#image1, #image3, #image5", snapmode: 'outer'});
+            $('#image3').draggable({ snap: "#image2, #image6", snapmode: 'outer'});
+            $('#image4').draggable({ snap: "#image1, #image5, #image7", snapmode: 'outer'});
+            $('#image5').draggable({ snap: "#image2, #image4, #image6, #image8", snapmode: 'outer'});
+            $('#image6').draggable({ snap: "#image3, #image5, #image9", snapmode: 'outer'});
+            $('#image7').draggable({ snap: "#image4, #image8", snapmode: 'outer'});
+            $('#image8').draggable({ snap: "#image5, #image7, #image9", snapmode: 'outer'});
+            $('#image9').draggable({ snap: "#image6, #image8", snapmode: 'outer'});
+
+            // changer le curseur : mousedown bouton de souris cliqué, mouseup bouton de souris relâché
+            $('img').mousedown(function(){
+                $(this).css('cursor','grabbing');
+            });
+            $('img').mouseup(function(){
+                $(this).css('cursor','grab');
+            });
+        });
+    </script>
+</body>
+</html>

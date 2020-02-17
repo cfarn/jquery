@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculatrice</title>
     <style>
-        
+        #conteneur p {
+            background: gold;
+        }
     </style>
+    <script>
+        // exercice 3 méthode 1 :
+        //  f° qui met du texte dans le p  
+        function saisie1_on() {
+            var message_saisie1 = 'Veuillez saisir un chiffre';
+            $('#conteneur p').text(message_saisie1);
+        }
+        function saisie1_off() {
+            $('#conteneur p').text("");
+        }
+    </script>
 </head>
 
 <body>
@@ -21,18 +33,19 @@
     </p>
     <div id="conteneur" style="background: dodgerblue; height:200px; width:80%; margin: 0 auto; text-align:center; padding-top: 80px;">
         <form action="#" method="GET" name="formulaire">
-            <input type="number" name="saisie1" id="saisie1">
+            <input onmouseover="saisie1_on()" onmouseout="saisie1_off()" type="number" name="saisie1" id="saisie1">
             <select name="operateur" id="operateur">
                 <option>+</option>
                 <option>-</option>
                 <option>*</option>
                 <option>/</option>
             </select>
-            <input type="number" name="saisie2" id="saisie2">
+            <input onmouseover="saisie1_on()" onmouseout="saisie1_off()" type="number" name="saisie2" id="saisie2">
             <input type="submit" name="bouton" id="bouton" value="Calculer">
+            <input type="reset" name="bouton" id="bouton" value="Réinitialiser">
         </form>
+        <p></p>
     </div>
-
 
     <script src="../source/jquery-3.4.1.js"></script>
     <script>
@@ -49,10 +62,12 @@
                 var operateur = $('#operateur').val();
                 console.log(operateur);
 
+                var submit = $('#bouton').val();
+                console.log(submit);
+
                 if(operateur == '+'){
                     resultat=parseFloat(saisie1)+parseFloat(saisie2);
                     console.log(resultat);
-
                 }
 
                 if(operateur == '-'){
@@ -60,7 +75,7 @@
                     console.log(resultat);
                 }
 
-                 if (operateur == '*') {
+                if (operateur == '*') {
                    resultat = (saisie1 * saisie2);
                    console.log(resultat);
                }
@@ -70,23 +85,38 @@
                    console.log(resultat);
                }
 
-               alert(saisie1+operateur+saisie2 + "=" + resultat);
+               alert(saisie1 + " " + operateur + " " + saisie2 + " = " + resultat);
            };
 
            $('#bouton').click(calcul);
 
            $('#afficher').click(function(){
-                $('#conteneur').slideDown();
+               $('#conteneur').slideDown();
+                // function(){alert('fini!')} : callback
+                // $('#conteneur').slideDown(2000, function(){alert('fini!')});
            });
 
            $('#cacher').click(function(){
                 $('#conteneur').slideUp();
+                // par transparence
+                // $('#conteneur').fadeTo(2000, 0.5);
            });
 
            $('#toggle').click(function(){
                 $('#conteneur').slideToggle();
            });
 
+            // exercice 3 méthode 2
+            var message_operateur = 'Veuillez saisir un opérateur';
+
+            $('#operateur').hover(
+                function(){
+                    $('#conteneur p').html(message_operateur);
+                },
+                function(){ 
+                    $('#conteneur p').html('');
+                }
+                );
        }); 
     </script>
 </body>
