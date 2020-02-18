@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript">
+		  var currentKey;
+		  var TimerWalk;
+		  var charStep = 2; //1=1st foot, 2=stand, 3=2nd foot, 4=stand
+		  var charSpeed = 400;
+		  
+		  $(document).ready(function() {
+			
+			//load character state
+			$('#character').addClass('front-stand');
+			
+		  });
+		  
+		  $(document).keydown(function(e) {
+			  if (!currentKey) {
+				currentKey = e.keyCode;
+				switch(e.keyCode) {
+				  case 38: charWalk('up');    break;
+				  case 39: charWalk('right'); break;
+				  case 40: charWalk('down');  break;
+				  case 37: charWalk('left');  break;
+				}
+			  }
+		  });
+		  
+		  $(document).keyup(function(e) {
+			//don't stop the walk if the player is pushing other buttons
+			//only stop the walk if the key that started the walk is released
+			if (e.keyCode == currentKey) {
+			  currentKey = false;
+			  clearInterval(TimerWalk);
+			  $('#character').stop(true, true);
+			}
+		  });
+		  
+		  function charWalk(dir) {
+			  
+			  //adjust from lang to code
+			  if (dir == 'up') dir = 'back';
+			  if (dir == 'down') dir = 'front';
+			  
+			  processWalk(dir);
+			  TimerWalk = setInterval(function() { processWalk(dir); }, charSpeed);
+		  }
+		  
+		  function processWalk(dir) {
+			  
+			  charStep++;
+			  if (charStep == 5) charStep = 1;
+				
+			  //remove the current class
+			  $('#character').removeAttr('class');
+				
+			  //add the new class
+			  switch(charStep) {
+				case 1: $('#character').addClass(dir+'-stand'); break;
+				case 2: $('#character').addClass(dir+'-right'); break;
+				case 3: $('#character').addClass(dir+'-stand'); break;
+				case 4: $('#character').addClass(dir+'-left');  break;
+			  }
+			  
+			  //move the char
+			  switch(dir) {
+				case'front':
+					$('#character').animate({top: '+=32'}, charSpeed);
+				  break;
+				case'back':
+				  if ($('#character').position().top > 0) {
+					$('#character').animate({top: '-=32'}, charSpeed);
+				  }
+				  break;
+				case'left':
+				  if ($('#character').position().left > 0) {
+					$('#character').animate({left: '-=32'}, charSpeed);
+				  }
+				  break;
+				case'right':
+					$('#character').animate({left: '+=32'}, charSpeed);
+				  break;
+			  }
+				  
+		  }
+		</script>
+		<style type="text/css">
+		  #character {
+			  position: absolute;
+			  top: 0px;
+			  left: 0px;
+			  width: 32px;
+			  height: 32px;
+			  background: url('character.png') no-repeat;
+		  }
+		  
+		  #character.front-right { background-position: 0px 0px; }
+		  #character.front-stand { background-position: -32px 0px; }
+		  #character.front-left { background-position: -64px 0px; }
+		  
+		  #character.left-right { background-position: 0px -32px; }
+		  #character.left-stand { background-position: -32px -32px; }
+		  #character.left-left { background-position: -64px -32px; }
+		  
+		  #character.right-right { background-position: -64px -64px; }
+		  #character.right-stand { background-position: -32px -64px; }
+		  #character.right-left { background-position: -0px -64px; }
+		  
+		  #character.back-right { background-position: 0px -96px; }
+		  #character.back-stand { background-position: -32px -96px; }
+		  #character.back-left { background-position: -64px -96px; }
+		</style>
+	</head>
+
+	<body>
+		<div id="character"></div>
+	</body>
+	</html>

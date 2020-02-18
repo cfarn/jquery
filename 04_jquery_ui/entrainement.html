@@ -35,6 +35,67 @@
             background: tomato;
             border: 1px solid red;
         }
+
+        /* Droppable */
+        #joueur {
+            width: 50%;
+            border: 2px solid grey;
+            /* float: left; */
+        }
+
+        #adversaire {
+            width: 200px;
+            height: 200px;
+            border: 2px solid black; 
+            /* float: right; */
+        }
+
+        /* Resizable */
+        #resizable {
+            width: 250px;
+            height: 250px;
+            border: 1px solid;
+        }
+
+        #resizable h5 {
+            background: lightgrey;
+            text-align: center;
+            margin: 0;
+            padding: 10px;
+        } 
+
+        /* .ui-resizable-helper { border: 1px dotted red; }  */
+        .monHelper { border: 1px dotted green; }    
+
+        /* Selectable */
+        /* classe du parent (liste ol) */
+        .ui-selectable{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* classe de l'élément sélectionnable par défaut */
+        .ui-selectee{
+            background: grey;
+            color:#fff;
+            padding: 5px 10px;
+            border: 1px solid black;
+            width: 150px;
+            text-align: center;
+        }
+        /* classe de l'élément en train d'être cliqué */
+        .ui-selecting { 
+            background: #bbb; 
+        }
+
+        /* classe de l'élément une fois cliqué */
+        .ui-selected { 
+            background: #333; 
+            color: white; 
+        }
+
+
     </style>
 </head>
 <body>
@@ -132,7 +193,7 @@
     </div>
     <hr>
 
-    <!-- vh : 100% de la taille du navigateur -->
+    <!-- vh (viewport height) : 100% de la taille du navigateur; width: 50vw, la moitié de l'écran -->
     <div style="border: 1px solid red; height: 100vh;">
         <img id="image1" src="images/cheval_01.jpg" alt="cheval">
         <img id="image4" src="images/cheval_04.jpg" alt="cheval">
@@ -144,6 +205,48 @@
         <img id="image9" src="images/cheval_09.jpg" alt="cheval">
         <img id="image5" src="images/cheval_05.jpg" alt="cheval">
     </div>  
+    <div style="border: 5px solid blue; height: 80vh; display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+        <h4 style="width: 100%;">Droppable()</h4>
+
+        <div id="joueur">
+            <img id="ciseaux" src="images/droppable/ciseaux.png" alt="ciseaux">
+            <img id="feuille" src="images/droppable/feuille.png" alt="feuille">
+            <img id="pierre" src="images/droppable/pierre.png" alt="pierre">
+        </div>
+        <div id="adversaire">  
+            <img id="img_adv" src="images/droppable/ciseaux.png" alt="ciseaux">
+        </div>
+        <!-- <div id="ecran"></div> -->
+    </div>
+    <hr>
+
+    <div id="parent" style="border: 1px solid steelblue; height: 80vh;">
+        <h4>Resizable</h4>
+        <div id="resizable">
+            <h5>Redimensionnez-moi</h5>
+        </div>
+    </div>
+    <hr>
+
+    <div style="height: 20vh;">
+        <h4>Selectable</h4>
+        <ol id="selectable">
+            <li>Élément 1</li>
+            <li>Élément 2</li>
+            <li>Élément 3</li>
+        </ol>
+    </div>
+    <hr>
+
+    <h4>Date picker</h4>
+    <!-- Le date picker vient en remplacement du <input type="date"> tant que tous les nav ne permettent pas son utilisation -->
+    <input type="text" id="input" placeholder="choisir une date">
+    <hr>
+
+    <h4>Autocomplete</h4>
+    <input type="text" id="autocomplete">
+
 
     <!-- Script de jquery -->
     <script src="../source/jquery-3.4.1.js"></script>
@@ -204,6 +307,82 @@
             });
             $('img').mouseup(function(){
                 $(this).css('cursor','grab');
+            });
+
+            // Droppable()
+            $('#ciseaux, #feuille, #pierre').draggable({
+                // effet de retour si laissé dans une zone non acceptée
+                revert: "invalid"
+            });
+            
+            $("#adversaire").droppable({
+                accept: "#feuille, #pierre",
+                drop: function(evenement, element){
+                    if(element.draggable.is("#pierre")){
+                        alert("Gagné !");
+                        $("#adversaire").css("background", "lime");
+                        // $('#ecran').html('<img src="images/cheval_01.jpg" alt="cheval">');
+                    }else{
+                        alert("Perdu !");
+                         $("#adversaire").css("background", "orange");
+                    }       
+                }
+            });
+
+            // mettre en place un droppable sur le cadre gris (#joueur) pour y renvoyer les éléments
+            $("#joueur").droppable({
+                accept: "#feuille, #pierre, #ciseaux",
+                drop: function () {
+                    $(this).css("background", "lightgrey");
+                }
+            });
+
+            // function direBonjour(prenom){
+            //     document.write('Bonjour' + prenom)
+            // }
+            // direBonjour();
+
+            // Resizable
+            $("#resizable").resizable({
+                animate: true,
+                ghost: true,
+                containment: "#parent",
+                maxHeight: 600,
+                maxWidth: 750,
+                minHeight: 250,
+                minWidth: 250,
+                aspectRatio: 1 /1,
+                helper: "monHelper"
+            });
+
+            // Selectable
+            $("#selectable").selectable({
+                stop: function(){
+                    // alert('selection ok')
+                    console.log($('.ui-selected').text());
+                }
+            });
+
+            // Datepicker
+            $("#input").datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+                dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+                firstDay: 1,
+                duration: "slow"
+            });
+
+            // Autocomplete
+            var mesTags = [
+                "Paris",
+                "Nantes",
+                "Nice",
+                "Lyon",
+                "Lille",
+                "Rennes"
+            ]
+            $('#autocomplete').autocomplete({
+                source: mesTags
             });
         });
     </script>
